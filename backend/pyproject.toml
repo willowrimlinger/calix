@@ -1,0 +1,7 @@
+[tool.basedpyright]
+reportExplicitAny = false
+reportUnusedCallResult = false
+reportCallInDefaultInitializer = false
+reportImportCycles = false
+
+stubPath = "typings"

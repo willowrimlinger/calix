@@ -4,3 +4,4 @@ env*/
 .env*/
 
 *.py[cod]
+__pycache__/
