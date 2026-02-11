@@ -1,7 +1,10 @@
 [tool.basedpyright]
 reportExplicitAny = false
+reportAny = false
 reportUnusedCallResult = false
 reportCallInDefaultInitializer = false
 reportImportCycles = false
 
-stubPath = "typings"
+
+analysis.diagnosticMode = "workspace"
+# stubPath = "typings"

@@ -2,12 +2,18 @@ from flask import jsonify
 
 def resp_success(data: str | None = None, status: int = 200):
     if data is None:
-        return jsonify({"success": True}), status
-    return jsonify({"success": True, "data": data})
+        response = jsonify({"success": True})
+        response.status_code = status
+        return response
+    response = jsonify({"success": True, "data": data})
+    response.status_code = status
+    return response
 
-def resp_error(error_message: str | None = None, error_detail: str | None = None, status: int | None = 400):
+def resp_error(error_message: str | None = None, error_detail: str | None = None, status: int = 400):
     result = {"success": False, "error": error_message, "error_detail": error_detail}
-    return jsonify(result), status
+    response = jsonify(result)
+    response.status_code = status
+    return response
 
 
 def resp_bad_request(error_detail: str | None = None):

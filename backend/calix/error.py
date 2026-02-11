@@ -1,0 +1,2 @@
+class CalixError(Exception):
+    pass
