@@ -1,7 +1,8 @@
+from typing import Any
 from flask import jsonify
 
 
-def resp_success(data: str | None = None, status: int = 200):
+def resp_success(data: Any | None = None, status: int = 200):
     if data is None:
         response = jsonify({"success": True})
         response.status_code = status
@@ -36,5 +37,10 @@ def resp_not_found(error_detail: str | None = None):
     return resp_error("Not Found", error_detail, 404)
 
 
+def resp_id_not_found(object_name: str, id: int):
+    return resp_not_found(f"{object_name} with id {id} not found")
+
+
 def resp_internal_server_error(error_detail: str | None = None):
     return resp_error("Internal Server Error", error_detail, 500)
+
