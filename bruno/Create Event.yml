@@ -1,0 +1,26 @@
+info:
+  name: Create Event
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:5000/api/v1/event
+  body:
+    type: json
+    data: |-
+      {
+        "start": "2026-02-11T11:49:00",
+        "end": "2026-02-11T11:51:00",
+        "description": "desc",
+        "location": "",
+        "recurrence": null,
+        "label_id": 1
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
