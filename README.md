@@ -6,7 +6,6 @@ I made this because I'm a college student whose life is run through Google
 Calendar.
 I adore GCal, but it's got more than I need and runs poorly on my crappy laptop.
 I just want something simple, fast, and perfectly molded to my specific needs.
-Sorry everybody else.
 
 ## Requirements
 
