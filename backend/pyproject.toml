@@ -6,5 +6,4 @@ reportCallInDefaultInitializer = false
 reportImportCycles = false
 
 
-analysis.diagnosticMode = "workspace"
 # stubPath = "typings"

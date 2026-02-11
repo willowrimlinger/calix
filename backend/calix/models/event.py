@@ -20,13 +20,13 @@ class Event(db.Model):
     label: Mapped[Label] = relationship(lazy="joined", innerjoin=True)
 
     def __init__(
-            self,
-            start: datetime,
-            end: datetime,
-            description: str,
-            location: str,
-            recurrence: Recurrence,
-            label: Label,
+        self,
+        start: datetime,
+        end: datetime,
+        description: str,
+        location: str,
+        recurrence: Recurrence,
+        label: Label,
     ):
         if start > end:
             raise CalixError("Start time cannot be after end time")
@@ -47,4 +47,3 @@ class Event(db.Model):
             "recurrence": self.recurrence.to_dict() if self.recurrence else None,
             "label": self.label.to_dict() if self.label else None,
         }
-

@@ -13,11 +13,14 @@ def create_app():
     load_dotenv()
     app.config.from_prefixed_env("CALIX")
     app.json.default = json_defaults  # pyright: ignore[reportAttributeAccessIssue]
-    app.url_map.strict_slashes = False # /api/resource and /api/resource/ are treated the same
+    app.url_map.strict_slashes = (
+        False  # /api/resource and /api/resource/ are treated the same
+    )
     app.register_blueprint(api)
     Migrate(app, db)
     db.init_app(app)
     return app
+
 
 if __name__ == "__main__":
     app = create_app()
