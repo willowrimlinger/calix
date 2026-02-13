@@ -1,4 +1,5 @@
 from datetime import date
+from sqlalchemy import select
 from sqlalchemy.orm import Mapped, mapped_column
 from calix.db import db
 from enum import StrEnum
@@ -41,6 +42,17 @@ class Recurrence(db.Model):
         self.start_date = start_date
         self.end_date = end_date
         db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_by_id(cls, id: int):
+        return db.session.scalar(select(cls).where(cls.id == id))
+
+    def update(self, n: int, type: RecurrenceType, start_date: date, end_date: date):
+        self.n = n
+        self.type = type
+        self.start_date = start_date
+        self.end_date = end_date
         db.session.commit()
 
     def delete(self):

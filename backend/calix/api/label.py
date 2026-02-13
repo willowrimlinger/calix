@@ -24,6 +24,12 @@ def create(
     return resp_success(label)
 
 
+@label_api.get("/")
+@ValidateParameters()
+def get_all():
+    return resp_success({"labels": [label.to_dict() for label in Label.get_all()]})
+
+
 @label_api.get("/<int:id>")
 @ValidateParameters()
 def get(id: int = Route()):
@@ -31,7 +37,7 @@ def get(id: int = Route()):
     if not label:
         return resp_id_not_found("Label", id)
 
-    return label.to_dict()
+    return resp_success(label.to_dict())
 
 
 @label_api.put("/<int:id>")
@@ -43,7 +49,7 @@ def update(id: int = Route(), name: str = Json(), color: str = Json()):
 
     label.update(name, color)
 
-    return label.to_dict()
+    return resp_success(label.to_dict())
 
 
 @label_api.delete("/<int:id>")

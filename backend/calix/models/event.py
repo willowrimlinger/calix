@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from sqlalchemy import ForeignKey, Text, select
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from calix.db import db
@@ -16,8 +16,12 @@ class Event(db.Model):
     recurrence_id: Mapped[int | None] = mapped_column(ForeignKey("recurrence.id"))
     label_id: Mapped[int] = mapped_column(ForeignKey("label.id"))
 
-    recurrence: Mapped[Recurrence | None] = relationship(lazy="joined", cascade = "all, delete-orphan")
-    label: Mapped[Label] = relationship(back_populates="events", lazy="joined", innerjoin=True)
+    recurrence: Mapped[Recurrence | None] = relationship(
+        lazy="joined", cascade="all, delete-orphan"
+    )
+    label: Mapped[Label] = relationship(
+        back_populates="events", lazy="joined", innerjoin=True
+    )
 
     def __init__(
         self,
@@ -41,8 +45,31 @@ class Event(db.Model):
         db.session.commit()
 
     @classmethod
+    def get_range(cls, start: datetime, end: datetime):
+        return db.session.scalars(
+            select(cls).where(cls.start >= start).where(cls.end <= end)
+        )
+
+    @classmethod
     def get_by_id(cls, id: int):
         return db.session.scalar(select(cls).where(cls.id == id))
+
+    def update(
+        self,
+        start: datetime,
+        end: datetime,
+        description: str,
+        location: str,
+        recurrence: Recurrence | None,
+        label: Label,
+    ):
+        self.start = start
+        self.end = end
+        self.description = description
+        self.location = location
+        self.recurrence = recurrence
+        self.label = label
+        db.session.commit()
 
     def delete(self):
         return db.session.delete(self)

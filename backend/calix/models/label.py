@@ -39,6 +39,10 @@ class Label(db.Model):
         db.session.commit()
 
     @classmethod
+    def get_all(cls):
+        return db.session.scalars(select(cls))
+
+    @classmethod
     def get_by_id(cls, id: int):
         return db.session.scalar(select(cls).where(cls.id == id))
 
