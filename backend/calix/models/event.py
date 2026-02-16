@@ -1,4 +1,4 @@
-from datetime import date, datetime, timedelta
+from datetime import datetime
 from sqlalchemy import ForeignKey, Text, select
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from calix.db import db
