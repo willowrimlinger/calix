@@ -8,7 +8,7 @@ const config = {
     trailingComma: "all",
     bracketSpacing: false,
     arrowParens: "avoid",
-    // singleAttributePerLine: true,
+    singleAttributePerLine: true,
 };
 
 export default config;
