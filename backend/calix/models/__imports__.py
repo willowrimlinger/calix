@@ -1,3 +1,5 @@
+# pyright: strict, reportUnusedImport=false
+
 # Needed so that Alembic can find and track these models.
 # Any new models need to be imported here
 from calix.models.event import Event

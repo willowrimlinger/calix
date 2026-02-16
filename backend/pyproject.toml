@@ -6,4 +6,8 @@ reportCallInDefaultInitializer = false
 reportImportCycles = false
 
 
-# stubPath = "typings"
+stubPath = "typings"
+ignore = [
+    "typings",
+    "calix/migrations",
+]
