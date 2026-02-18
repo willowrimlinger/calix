@@ -1,0 +1,12 @@
+.dateNumCircle {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.dateNumCircleToday {
+    background: var(--mantine-color-accent-9);
+    color: var(--mantine-color-white)
+}
