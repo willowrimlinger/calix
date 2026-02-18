@@ -9,8 +9,8 @@ I just want something simple, fast, and perfectly molded to my specific needs.
 
 ## Requirements
 
-- Python 3.14 (but probably works on older versions)
-- Node.js 25 (but probably works on older versions)
+- Python 3.14
+- Node.js 25
 - MariaDB 12
 
 ## Install (Ubuntu)
@@ -18,7 +18,7 @@ I just want something simple, fast, and perfectly molded to my specific needs.
 The following assumes you are starting from a bare Ubuntu setup.
 Skip the parts you don't need to do.
 
-```
+```bash
 sudo apt update
 
 # install python
@@ -57,7 +57,7 @@ docker run --detach --name calix-db --env MARIADB_ROOT_PASSWORD=example MARIADB_
 
 ## Setup (Ubuntu)
 
-```
+```bash
 cd backend
 python3 -m venv venv
 source venv/bin/activate
@@ -75,16 +75,17 @@ cd ..
 
 In one terminal:
 
-```
+```bash
 cd backend/calix
 flask run
 ```
 
 In another:
 
-```
+```bash
 cd frontend/calix
 npm run dev
 ```
 
 Calix will be running on http://localhost:3000.
+
