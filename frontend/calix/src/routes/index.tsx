@@ -1,9 +1,17 @@
 import {createFileRoute} from "@tanstack/react-router";
-import {Center, Grid, Group, Paper, Text, Title} from "@mantine/core";
+import {
+    Center,
+    Grid,
+    Group,
+    Paper,
+    ScrollArea,
+    Text,
+    Title,
+} from "@mantine/core";
 import {DateTime} from "luxon";
 import {useMemo} from "react";
 import classes from "./index.module.css";
-import {DOW, intToDOW} from "@/types/event";
+import {DOW, intToDOW} from "@/types/dow";
 
 export const Route = createFileRoute("/")({
     component: App,
@@ -44,25 +52,43 @@ function App() {
     }, []);
 
     return (
-        <Paper p="sm">
+        <Paper p="0">
             <Group
                 gap="xl"
                 align="center"
+                h="2.25rem"
+                p="xs"
             >
                 <Title order={2}>Calix</Title>
             </Group>
-            <Grid columns={7}>
-                {displayDays.map(day => (
-                    <Grid.Col span={1}>
+            <Grid
+                columns={7}
+                gutter={0}
+            >
+                {displayDays.map((day, idx) => (
+                    <Grid.Col
+                        key={day.dateTime.toISO()}
+                        span={1}
+                        style={{
+                            borderLeft: "1px none",
+                            borderRight: idx === 6 ? "1px none" : undefined,
+                        }}
+                    >
                         <Group
                             align="baseline"
                             gap="0.25rem"
+                            style={{
+                                borderBottom: "1px solid #d0d0d0",
+                            }}
+                            h="calc(6px + 3.5rem)"
                         >
                             <Center
                                 className={`
                                     ${classes.dateNumCircle}
                                     ${day.isToday ? classes.dateNumCircleToday : ""}
                                 `}
+                                ml="6px"
+                                mb="6px"
                             >
                                 {day.dateTime.get("day")}
                             </Center>
@@ -71,6 +97,61 @@ function App() {
                     </Grid.Col>
                 ))}
             </Grid>
+            <ScrollArea
+                style={{
+                    height: "calc(100vh - 6px - 3.5rem - 2.25rem)",
+                }}
+            >
+                <Group wrap="nowrap">
+                    <div
+                        style={{
+                            display: "grid",
+                        }}
+                    >
+                        {[...Array(24).keys()].map(i => (
+                            <div>{i}</div>
+                        ))}
+                    </div>
+                    <Grid
+                        columns={7}
+                        gutter={0}
+                        style={{
+                            flexGrow: 1,
+                        }}
+                    >
+                        {displayDays.map((day, idx) => (
+                            <Grid.Col
+                                key={day.dateTime.toISO()}
+                                span={1}
+                                style={{
+                                    borderLeft:
+                                        "1px solid var(--mantine-color-gray-4)",
+                                    borderRight:
+                                        idx === 6
+                                            ? "1px solid var(--mantine-color-gray-4)"
+                                            : undefined,
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        display: "grid",
+                                    }}
+                                >
+                                    {[...Array(24).keys()].map(i => (
+                                        <div
+                                            style={{
+                                                height: "4rem",
+                                            }}
+                                        >
+                                            {i}
+                                        </div>
+                                    ))}
+                                </div>
+                            </Grid.Col>
+                        ))}
+                    </Grid>
+                </Group>
+            </ScrollArea>
         </Paper>
     );
 }
